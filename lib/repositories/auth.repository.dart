@@ -14,13 +14,17 @@ class AutenticacaoRepository {
     return ApiResponse.fromJson(retorno.data);
   }
 
-  setIsLogged() async {
+  setIsLogged({bool isLogged = false}) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    return localStorage.setBool('isLogged', true);
+    return localStorage.setBool('isLogged', isLogged);
   }
 
   Future<bool> getIsLogged() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
+
+    if (localStorage.getBool('isLogged') == null)
+      await setIsLogged(isLogged: false);
+
     return localStorage.getBool('isLogged');
   }
 }

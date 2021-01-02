@@ -1,6 +1,8 @@
 import 'package:app_notes/android/views/cart/components/body.dart';
 import 'package:app_notes/android/widgets/default_button.widget.dart';
+import 'package:app_notes/android/widgets/loader.widget.dart';
 import 'package:app_notes/controllers/shopping-cart.controller.dart';
+import 'package:app_notes/utils/constantes.dart';
 import 'package:app_notes/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,20 +22,39 @@ class CartView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
+            iconTheme: IconThemeData(
+              color: Colors.white, //change your color here
+            ),
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                color: Colors.orange,
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 10),
+                    blurRadius: 10,
+                    color: Color(0xFF000000).withOpacity(0.15),
+                  )
+                ],
+              ),
+            ),
             title: Column(
               children: [
                 Text("Carrinho",
-                    style: TextStyle(color: Colors.black, fontFamily: 'Muli')),
-                Text("${shoppingCartController.shoppingCartItems.length} items",
-                    style: Theme.of(context).textTheme.caption)
+                    style: TextStyle(color: Colors.white, fontFamily: 'Muli')),
+                Text(
+                  "${shoppingCartController.shoppingCartItems.length} items",
+                  style: TextStyle(
+                    fontFamily: 'Muli',
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
+                )
               ],
             ),
           ),
           body: !shoppingCartController.carregando.value
               ? Body()
-              : Center(
-                  child: Text("Carregando"),
-                ),
+              : Loader(),
           bottomNavigationBar: !shoppingCartController.carregando.value
               ? CheckOurCard(
                   totalItems: shoppingCartController.quantityItems,

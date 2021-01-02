@@ -13,16 +13,14 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+    return Container(
       child: ListView.builder(
         itemBuilder: (context, index) {
           var product = shoppingCartController.shoppingCartItems[index].product;
           var quantity =
               shoppingCartController.shoppingCartItems[index].quantity;
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Dismissible(
               direction: DismissDirection.endToStart,
               key: Key(product.id.toString()),
@@ -87,7 +85,7 @@ class Body extends StatelessWidget {
                                   productId: product.id,
                                   shoppingCartId: 1,
                                   quantity: shoppingCartController
-                                      .shoppingCartItems[index].quantity -
+                                          .shoppingCartItems[index].quantity -
                                       1),
                             );
                           },

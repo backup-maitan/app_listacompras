@@ -10,7 +10,7 @@ class AndroidApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'AppNotes',
+      title: 'Lista de Compras',
       debugShowCheckedModeBanner: false,
       theme: theme(),
       initialRoute: '/',

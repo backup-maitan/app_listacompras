@@ -11,14 +11,14 @@ class AuthController extends GetxController {
   AutenticacaoRepository repository = AutenticacaoRepository();
 
   RxList<Errors> errors = List<Errors>().obs;
+  RxBool isLogged = false.obs;
 
   checkIsLogged() async {
-    bool isLogged = await this.repository.getIsLogged();
-    print(isLogged);
-    if (isLogged) {
-      Get.toNamed('/home-product');
+    this.isLogged.value = await this.repository.getIsLogged();
+    if (this.isLogged.value) {
+      Get.offNamed('/home-products');
     } else {
-      Get.toNamed('/login');
+      Get.offNamed('/login');
     }
   }
 
@@ -30,7 +30,7 @@ class AuthController extends GetxController {
       exibirSnack('Ocorreu um erro', apiResponse.message);
     }
 
-    await this.repository.setIsLogged();
+    await this.repository.setIsLogged(isLogged: true);
     return apiResponse;
   }
 
