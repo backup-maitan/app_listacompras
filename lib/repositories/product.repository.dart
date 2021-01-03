@@ -14,13 +14,15 @@ class ProductRepository {
   Future<List<Product>> listar({Map<String, dynamic> query}) async {
     List<Product> categorias = [];
     var response =
-         await repository.get(endpoint: 'products', parameters: query);
+        await repository.get(endpoint: 'products', parameters: query);
 
-     if (response != null && response.statusCode == 200)
-       for (var item in (response.data as List)) {
-         var categoria = Product.fromJson(item);
-         categorias.add(categoria);
-       }
+    if (response != null && response.statusCode == 200)
+      for (var item in (response.data as List)) {
+        var categoria = Product.fromJson(item);
+        categorias.add(categoria);
+      }
+
+    await Future.delayed(Duration(seconds: 2)); // remover depois
 
     return categorias;
   }

@@ -126,7 +126,7 @@ class LoaderController extends GetxController
   Animation<double> animation_radius_in;
   Animation<double> animation_radius_out;
 
-  final double initialRadius = 30.0;
+  final double initialRadius = 35.0;
   RxDouble radius = 0.0.obs;
 
   @override

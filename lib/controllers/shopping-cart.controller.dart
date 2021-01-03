@@ -1,20 +1,22 @@
+import 'dart:convert';
+
 import 'package:app_notes/dto/add-item-cart.dto.dart';
-import 'package:app_notes/dto/get-cart-items.dto.dart';
 import 'package:app_notes/models/shopping-cart-items.model.dart';
 import 'package:app_notes/models/shopping-cart.model.dart';
+import 'package:app_notes/repositories/auth.repository.dart';
 import 'package:app_notes/repositories/shopping-cart.repository.dart';
-import 'package:app_notes/utils/util.dart';
-import 'package:flutter/material.dart';
+import 'package:app_notes/repositories/user.repository.dart';
 import 'package:get/get.dart';
 
 class ShoppingCartController extends GetxController {
   ShoppingCartRepository shoppingCartRepository = ShoppingCartRepository();
+  AutenticacaoRepository authRepository = AutenticacaoRepository();
 
   RxBool carregando = true.obs;
 
-  Rx<ShoppingCart> shoppingCart = ShoppingCart().obs;
-  RxList<ShoppingCart> shoppingCarts = List<ShoppingCart>().obs;
-  RxList<ShoppingCartItems> shoppingCartItems = List<ShoppingCartItems>().obs;
+  Rx<ShoppingLists> shoppingList = ShoppingLists().obs;
+  RxList<ShoppingLists> shoppingLists = List<ShoppingLists>().obs;
+  RxList<ShoppingListsItems> shoppingCartItems = List<ShoppingListsItems>().obs;
 
   int get quantityItems {
     return carregando.value ? 0 : shoppingCartItems.length;
@@ -26,27 +28,32 @@ class ShoppingCartController extends GetxController {
   }
 
   listar() async {
-    shoppingCarts.assignAll(await shoppingCartRepository.listar());
+    shoppingLists.assignAll(await shoppingCartRepository.listar());
     carregando.value = false;
     print(carregando);
   }
 
-  getCartItems(int shoppingCartId) async {
-    shoppingCartItems.assignAll(await shoppingCartRepository.getCartItems(shoppingCartId));
+  getCartItems() async {
+    var shoppingList = await authRepository.getFirstShoppingLists();
+    shoppingCartItems
+        .assignAll(await shoppingCartRepository.getCartItems(shoppingList.id));
     carregando.value = false;
   }
 
-  add(ShoppingCart shoppingCart) async {
+  add(ShoppingLists shoppingLists) async {
     var response =
-        await shoppingCartRepository.adicionar(shoppingCart.toJson());
+        await shoppingCartRepository.adicionar(shoppingLists.toJson());
     if (response) listar();
   }
 
   addItemToCart(AddItemToCartDTO addItemToCartDTO) async {
+    var shoppingList = await authRepository.getFirstShoppingLists();
+    addItemToCartDTO.shoppingListId = shoppingList.id;
+
     var response =
         await shoppingCartRepository.addItemToCart(addItemToCartDTO.toJson());
     if (response) {
-      getCartItems(1);
+      getCartItems();
       // exibirSnack('Sucesso', 'Item adicionado ao carrinho');
     }
   }

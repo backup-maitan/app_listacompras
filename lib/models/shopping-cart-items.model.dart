@@ -1,23 +1,21 @@
 import 'package:app_notes/models/product.model.dart';
-import 'package:flutter/cupertino.dart';
 
-class ShoppingCartItems {
+class ShoppingListsItems {
   int id;
   int quantity;
   Product product;
 
-  ShoppingCartItems({
+  ShoppingListsItems({
     this.id,
     this.product,
     this.quantity,
   });
 
-  ShoppingCartItems.fromJson(Map<String, dynamic> json) {
+  ShoppingListsItems.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     quantity = json['quantity'];
     product =
         json['product'] != null ? new Product.fromJson(json['product']) : null;
-    // user_id = json['user_id'];
   }
 
   Map<String, dynamic> toJson() {

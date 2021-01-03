@@ -1,11 +1,8 @@
-import 'package:app_notes/android/views/home/home.view.dart';
-import 'package:app_notes/android/views/login/login.view.dart';
 import 'package:app_notes/repositories/auth.repository.dart';
 import 'package:app_notes/utils/errors.dart';
 import 'package:get/get.dart';
 import 'package:app_notes/shared/api-response.dart';
 import 'package:app_notes/utils/util.dart';
-import 'package:app_notes/models/usuario.model.dart';
 
 class AuthController extends GetxController {
   AutenticacaoRepository repository = AutenticacaoRepository();
@@ -30,7 +27,7 @@ class AuthController extends GetxController {
       exibirSnack('Ocorreu um erro', apiResponse.message);
     }
 
-    await this.repository.setIsLogged(isLogged: true);
+    Get.offNamed('/home-products');
     return apiResponse;
   }
 

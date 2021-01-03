@@ -2,7 +2,6 @@ import 'package:app_notes/android/views/cart/components/body.dart';
 import 'package:app_notes/android/widgets/default_button.widget.dart';
 import 'package:app_notes/android/widgets/loader.widget.dart';
 import 'package:app_notes/controllers/shopping-cart.controller.dart';
-import 'package:app_notes/utils/constantes.dart';
 import 'package:app_notes/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +15,7 @@ class CartView extends StatelessWidget {
     return GetX(
       init: shoppingCartController,
       initState: (_) {
-        shoppingCartController.getCartItems(1);
+        shoppingCartController.getCartItems();
       },
       builder: (_) {
         return Scaffold(
@@ -52,9 +51,7 @@ class CartView extends StatelessWidget {
               ],
             ),
           ),
-          body: !shoppingCartController.carregando.value
-              ? Body()
-              : Loader(),
+          body: !shoppingCartController.carregando.value ? Body() : Loader(),
           bottomNavigationBar: !shoppingCartController.carregando.value
               ? CheckOurCard(
                   totalItems: shoppingCartController.quantityItems,

@@ -1,6 +1,4 @@
 import 'package:app_notes/android/views/cart/cart.view.dart';
-import 'package:app_notes/android/views/cart/components/cart_item_card.dart';
-import 'package:app_notes/android/widgets/default_button.widget.dart';
 import 'package:app_notes/android/widgets/icon_btn_with_counter.dart';
 import 'package:app_notes/android/widgets/loader.widget.dart';
 import 'package:app_notes/controllers/product.controller.dart';
@@ -25,7 +23,7 @@ class Body extends StatelessWidget {
       init: productController,
       initState: (_) async {
         await productController.listar();
-        await shoppingCartController.getCartItems(1);
+        await shoppingCartController.getCartItems();
       },
       builder: (_) {
         return Container(
@@ -122,7 +120,7 @@ class Body extends StatelessWidget {
                           child: RefreshIndicator(
                             onRefresh: () async {
                               await productController.listar();
-                              await shoppingCartController.getCartItems(1);
+                              await shoppingCartController.getCartItems();
                             },
                             color: Colors.black,
                             child: ListView.separated(
@@ -187,7 +185,6 @@ class Body extends StatelessWidget {
                                                 AddItemToCartDTO(
                                                     productId: productController
                                                         .products[index].id,
-                                                    shoppingCartId: 1,
                                                     quantity: 1),
                                               );
                                             },

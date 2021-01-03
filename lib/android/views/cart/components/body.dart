@@ -58,7 +58,6 @@ class Body extends StatelessWidget {
                             shoppingCartController.addItemToCart(
                               AddItemToCartDTO(
                                   productId: product.id,
-                                  shoppingCartId: 1,
                                   quantity: shoppingCartController
                                           .shoppingCartItems[index].quantity +
                                       1),
@@ -83,7 +82,6 @@ class Body extends StatelessWidget {
                             shoppingCartController.addItemToCart(
                               AddItemToCartDTO(
                                   productId: product.id,
-                                  shoppingCartId: 1,
                                   quantity: shoppingCartController
                                           .shoppingCartItems[index].quantity -
                                       1),

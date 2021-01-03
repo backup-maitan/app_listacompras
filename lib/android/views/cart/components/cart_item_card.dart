@@ -1,5 +1,4 @@
 import 'package:app_notes/models/product.model.dart';
-import 'package:app_notes/models/shopping-cart.model.dart';
 import 'package:app_notes/utils/constantes.dart';
 import 'package:app_notes/utils/size_config.dart';
 import 'package:flutter/material.dart';

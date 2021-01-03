@@ -2,14 +2,10 @@ import 'package:app_notes/android/views/home/home.view.dart';
 import 'package:app_notes/android/widgets/custom-suffix-icon.widget.dart';
 import 'package:app_notes/android/widgets/default_button.widget.dart';
 import 'package:app_notes/controllers/auth.controller.dart';
-import 'package:app_notes/utils/errors.dart';
 import 'package:app_notes/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:app_notes/android/views/home-todo.view.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -69,11 +65,10 @@ class LoginForm extends StatelessWidget {
             DefaultButton(
               text: "Continuar",
               press: () async {
-                var result = await authController.authenticate(
-                    email: email.text, password: pass.text);
-                if (result.success) {
-                  Get.to(HomeView());
-                }
+                await authController.authenticate(
+                  email: email.text,
+                  password: pass.text,
+                );
               },
             )
           ],

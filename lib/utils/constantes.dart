@@ -2,7 +2,7 @@ import 'package:app_notes/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
 class Constantes {
-  static String urlAPI = "http://192.168.1.2:3000/api";
+  static String urlAPI = "http://192.168.1.6:3000/api";
 }
 
 const kPrimaryColor = Color(0xFFFF7643);

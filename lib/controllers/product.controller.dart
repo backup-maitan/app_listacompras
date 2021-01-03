@@ -15,7 +15,6 @@ class ProductController extends GetxController {
     carregando.value = true;
     print(carregando);
     products.assignAll(await productRepository.listar());
-    Future.delayed(Duration(seconds: 5));
     carregando.value = false;
     print(carregando);
   }
