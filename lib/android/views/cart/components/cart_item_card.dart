@@ -16,8 +16,6 @@ class CartItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(cart.toJson());
-
     return Row(
       children: [
         SizedBox(

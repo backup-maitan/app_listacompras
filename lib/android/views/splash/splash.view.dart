@@ -1,4 +1,5 @@
 import 'package:app_notes/controllers/auth.controller.dart';
+import 'package:app_notes/controllers/storage.controller.dart';
 import 'package:app_notes/utils/constantes.dart';
 import 'package:app_notes/utils/size_config.dart';
 import 'package:flutter/material.dart';
@@ -6,21 +7,21 @@ import 'package:get/get.dart';
 
 class SplashView extends StatelessWidget {
   AuthController authController = Get.put(AuthController());
+  StorageController storageController = Get.put(StorageController());
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return GetBuilder<AuthController>(
       init: authController,
-      initState: (_) {
-        authController.checkIsLogged();
+      initState: (_) async {
+        await storageController.setStorageDefault();
+        await authController.checkIsLogged();
       },
       builder: (controller) {
         return Scaffold(
           body: Container(
-            decoration: BoxDecoration(
-              gradient: kPrimaryGradientColor
-            ),
+            decoration: BoxDecoration(gradient: kPrimaryGradientColor),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

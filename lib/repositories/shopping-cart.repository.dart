@@ -36,10 +36,10 @@ class ShoppingCartRepository {
     return shoppingCarts;
   }
 
-  Future<List<ShoppingListsItems>> getCartItems(int shoppingCartId) async {
+  Future<List<ShoppingListsItems>> getCartItems(int shoppingListId) async {
     List<ShoppingListsItems> shoppingCartsItems = [];
     var response = await repository
-        .get(endpoint: 'shopping-lists/items/$shoppingCartId', parameters: {});
+        .get(endpoint: 'shopping-lists/items/$shoppingListId', parameters: {});
 
     if (response != null && response.statusCode == 200)
       for (var item in (response.data as List)) {

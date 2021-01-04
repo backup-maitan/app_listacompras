@@ -23,7 +23,7 @@ class Body extends StatelessWidget {
       init: productController,
       initState: (_) async {
         await productController.listar();
-        await shoppingCartController.getCartItems();
+        await shoppingCartController.getItems();
       },
       builder: (_) {
         return Container(
@@ -120,7 +120,7 @@ class Body extends StatelessWidget {
                           child: RefreshIndicator(
                             onRefresh: () async {
                               await productController.listar();
-                              await shoppingCartController.getCartItems();
+                              await shoppingCartController.getItems();
                             },
                             color: Colors.black,
                             child: ListView.separated(

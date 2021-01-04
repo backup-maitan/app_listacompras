@@ -1,5 +1,3 @@
-import 'package:flutter/widgets.dart';
-
 class AddItemToCartDTO {
   int productId;
   int shoppingListId;

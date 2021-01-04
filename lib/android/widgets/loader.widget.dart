@@ -131,7 +131,6 @@ class LoaderController extends GetxController
 
   @override
   void onInit() {
-    // TODO: implement onInit
     controller = AnimationController(
       vsync: this,
       duration: Duration(seconds: 3),

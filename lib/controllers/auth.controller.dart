@@ -1,4 +1,5 @@
 import 'package:app_notes/repositories/auth.repository.dart';
+import 'package:app_notes/repositories/storage.repository.dart';
 import 'package:app_notes/utils/errors.dart';
 import 'package:get/get.dart';
 import 'package:app_notes/shared/api-response.dart';
@@ -6,13 +7,15 @@ import 'package:app_notes/utils/util.dart';
 
 class AuthController extends GetxController {
   AutenticacaoRepository repository = AutenticacaoRepository();
+  StorageRepository storageRepository = StorageRepository();
 
   RxList<Errors> errors = List<Errors>().obs;
-  RxBool isLogged = false.obs;
+  // RxBool isLogged = false.obs;
 
   checkIsLogged() async {
-    this.isLogged.value = await this.repository.getIsLogged();
-    if (this.isLogged.value) {
+    var isLogged = await storageRepository.getIsLogged();
+    print(isLogged);
+    if (isLogged) {
       Get.offNamed('/home-products');
     } else {
       Get.offNamed('/login');
@@ -30,11 +33,6 @@ class AuthController extends GetxController {
     Get.offNamed('/home-products');
     return apiResponse;
   }
-
-  // listar() async {
-  //   categorias.assignAll(await categoriaRepository.listar());
-  //   carregando.value = false;
-  // }
 
   addError(String error) async {
     errors.add(Errors(message: error));

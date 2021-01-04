@@ -7,15 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartView extends StatelessWidget {
-  final ShoppingCartController shoppingCartController =
-      Get.put(ShoppingCartController());
+  final ShoppingCartController shoppingCartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return GetX(
+    return GetX<ShoppingCartController>(
       init: shoppingCartController,
-      initState: (_) {
-        shoppingCartController.getCartItems();
+      initState: (_) async {
+        await shoppingCartController.getItems();
       },
       builder: (_) {
         return Scaffold(
@@ -51,13 +50,17 @@ class CartView extends StatelessWidget {
               ],
             ),
           ),
-          body: !shoppingCartController.carregando.value ? Body() : Loader(),
-          bottomNavigationBar: !shoppingCartController.carregando.value
-              ? CheckOurCard(
+          body: shoppingCartController.carregando.value
+              ? Center(
+                  child: Loader(),
+                )
+              : Body(),
+          bottomNavigationBar: shoppingCartController.carregando.value
+              ? null
+              : CheckOurCard(
                   totalItems: shoppingCartController.quantityItems,
                   totalQuantidade: shoppingCartController.unity,
-                )
-              : null,
+                ),
         );
       },
     );

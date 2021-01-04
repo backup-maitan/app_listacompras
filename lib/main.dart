@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:app_notes/android/android.app.dart';
-import 'package:app_notes/utils/constantes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

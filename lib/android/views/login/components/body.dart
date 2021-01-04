@@ -1,4 +1,3 @@
-import 'package:app_notes/android/views/home/home.view.dart';
 import 'package:app_notes/android/widgets/custom-suffix-icon.widget.dart';
 import 'package:app_notes/android/widgets/default_button.widget.dart';
 import 'package:app_notes/controllers/auth.controller.dart';

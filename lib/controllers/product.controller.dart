@@ -1,7 +1,6 @@
 import 'package:app_notes/models/product.model.dart';
 import 'package:get/get.dart';
 import 'package:app_notes/repositories/product.repository.dart';
-import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
 class ProductController extends GetxController {
   ProductRepository productRepository = ProductRepository();
@@ -13,10 +12,8 @@ class ProductController extends GetxController {
 
   listar() async {
     carregando.value = true;
-    print(carregando);
     products.assignAll(await productRepository.listar());
     carregando.value = false;
-    print(carregando);
   }
 
   add(Product categoria) async {
