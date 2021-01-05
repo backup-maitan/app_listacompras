@@ -34,6 +34,28 @@ class AuthController extends GetxController {
     return apiResponse;
   }
 
+  register({String name, String email, String password}) async {
+    ApiResponse apiResponse = await this.repository.register(
+          name: name,
+          email: email,
+          password: password,
+        );
+
+    if (!apiResponse.success) {
+      exibirSnack('Ocorreu um erro', apiResponse.message);
+    }
+
+    exibirSnack('Sucesso', 'Cadastro realizado');
+    await Future.delayed(Duration(seconds: 3));
+    Get.offNamed('/login');
+    return apiResponse;
+  }
+
+  logOut() async {
+    await storageRepository.remove('dataUser');
+    Get.offAllNamed('/login');
+  }
+
   addError(String error) async {
     errors.add(Errors(message: error));
     // var response = await categoriaRepository.adicionar(categoria.toJson());

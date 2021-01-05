@@ -89,7 +89,9 @@ class Body extends StatelessWidget {
                               IconBtnWithCounter(
                                 svgSrc: "assets/icons/User.svg",
                                 numOfItems: 0,
-                                press: () {},
+                                press: () {
+                                  Get.toNamed('/profile');
+                                },
                               )
                             ],
                           ),

@@ -1,6 +1,8 @@
 import 'package:app_notes/android/views/cart/cart.view.dart';
 import 'package:app_notes/android/views/home/home.view.dart';
 import 'package:app_notes/android/views/login/login.view.dart';
+import 'package:app_notes/android/views/profile/profile.view.dart';
+import 'package:app_notes/android/views/register/register.view.dart';
 import 'package:app_notes/android/views/splash/splash.view.dart';
 import 'package:app_notes/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,8 @@ class AndroidApp extends StatelessWidget {
       routes: {
         '/': (context) => SplashView(),
         '/login': (context) => LoginView(),
+        '/register': (context) => RegisterView(),
+        '/profile': (context) => ProfileView(),
         '/home-products': (context) => HomeView(),
         '/carrinho': (context) => CartView(),
       },

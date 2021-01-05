@@ -21,4 +21,21 @@ class AutenticacaoRepository {
 
     return apiResponse;
   }
+
+  Future<ApiResponse> register(
+      {String name, String email, String password}) async {
+    var retorno = await repository.post(
+      endpoint: 'users',
+      body: {
+        'name': name,
+        'email': email,
+        'password': password,
+      },
+    );
+
+    ApiResponse apiResponse = ApiResponse.fromJson(retorno.data);
+    if (!apiResponse.success) return apiResponse;
+
+    return apiResponse;
+  }
 }
