@@ -14,6 +14,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 10),
       child: ListView.builder(
         itemBuilder: (context, index) {
           var product = shoppingCartController.shoppingCartItems[index].product;

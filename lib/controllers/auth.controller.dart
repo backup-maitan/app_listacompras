@@ -16,7 +16,7 @@ class AuthController extends GetxController {
     var isLogged = await storageRepository.getIsLogged();
     print(isLogged);
     if (isLogged) {
-      Get.offNamed('/home-products');
+      Get.offNamed('/home');
     } else {
       Get.offNamed('/login');
     }

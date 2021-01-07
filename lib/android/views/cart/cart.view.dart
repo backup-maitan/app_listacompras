@@ -28,7 +28,7 @@ class CartView extends StatelessWidget {
                 color: Colors.orange,
                 boxShadow: [
                   BoxShadow(
-                    offset: Offset(0, 10),
+                    offset: Offset(0, 5),
                     blurRadius: 10,
                     color: Color(0xFF000000).withOpacity(0.15),
                   )
@@ -38,7 +38,10 @@ class CartView extends StatelessWidget {
             title: Column(
               children: [
                 Text("Carrinho",
-                    style: TextStyle(color: Colors.white, fontFamily: 'Muli')),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Muli')),
                 Text(
                   "${shoppingCartController.shoppingCartItems.length} items",
                   style: TextStyle(
