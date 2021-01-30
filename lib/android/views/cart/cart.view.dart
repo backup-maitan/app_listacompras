@@ -61,6 +61,7 @@ class CartView extends StatelessWidget {
           bottomNavigationBar: shoppingCartController.carregando.value
               ? null
               : CheckOurCard(
+                  shoppingCartController: shoppingCartController,
                   totalItems: shoppingCartController.quantityItems,
                   totalQuantidade: shoppingCartController.unity,
                 ),
@@ -73,10 +74,12 @@ class CartView extends StatelessWidget {
 class CheckOurCard extends StatelessWidget {
   const CheckOurCard({
     Key key,
+    this.shoppingCartController,
     this.totalItems,
     this.totalQuantidade,
   }) : super(key: key);
 
+  final ShoppingCartController shoppingCartController;
   final int totalItems;
   final int totalQuantidade;
 
@@ -138,7 +141,9 @@ class CheckOurCard extends StatelessWidget {
                   width: getProportionateScreenWidth(160),
                   child: DefaultButton(
                     text: "Finalizar",
-                    press: () {},
+                    press: () async {
+                      await this.shoppingCartController.checkOut();
+                    },
                   ),
                 )
               ],

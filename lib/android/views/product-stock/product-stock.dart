@@ -1,7 +1,12 @@
 import 'package:app_notes/android/views/product-stock/components/body.dart';
 import 'package:flutter/material.dart';
+import 'package:app_notes/android/widgets/icon_btn_with_counter.dart';
+import 'package:get/get.dart';
+import 'package:app_notes/android/views/cart/cart.view.dart';
+import 'package:app_notes/controllers/shopping-cart.controller.dart';
 
 class ProductStockView extends StatelessWidget {
+  final ShoppingCartController shoppingCartController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +38,20 @@ class ProductStockView extends StatelessWidget {
             ),
           ],
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Obx(
+              () => IconBtnWithCounter(
+                svgSrc: "assets/icons/Plus Icon.svg",
+                numOfItems: shoppingCartController.quantityItems,
+                press: () {
+                  // Get.to(CartView());
+                },
+              ),
+            ),
+          )
+        ],
       ),
       body: Body(),
     );

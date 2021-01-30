@@ -16,6 +16,12 @@ class ProductController extends GetxController {
     carregando.value = false;
   }
 
+  findByUser() async {
+    // carregando.value = true;
+    products.assignAll(await productRepository.findByUser());
+    carregando.value = false;
+  }
+
   add(Product categoria) async {
     var response = await productRepository.adicionar(categoria.toJson());
     if (response) listar();

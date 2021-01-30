@@ -8,8 +8,7 @@ import 'package:app_notes/android/widgets/default_button.widget.dart';
 
 class HomeTodoView extends StatelessWidget {
   // final TodoController todoController = Get.put(TodoController());
-  final ProductController productController =
-      Get.put(ProductController());
+  final ProductController productController = Get.put(ProductController());
   @override
   Widget build(BuildContext context) {
     TextEditingController textEditingController = TextEditingController();
@@ -45,7 +44,7 @@ class HomeTodoView extends StatelessWidget {
                       press: () {
                         productController.add(
                           new Product(
-                          /*  user_id: 1,*/
+                            /*  user_id: 1,*/
                             name: textEditingController.text,
                           ),
                         );
@@ -65,7 +64,7 @@ class HomeTodoView extends StatelessWidget {
     return GetX<ProductController>(
       init: productController,
       initState: (_) {
-        productController.listar();
+        productController.findByUser();
       },
       builder: (_) {
         return Scaffold(

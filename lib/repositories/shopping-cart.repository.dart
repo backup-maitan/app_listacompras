@@ -22,6 +22,15 @@ class ShoppingCartRepository {
     // return ApiResponse.fromJson(response.data);
   }
 
+  Future<bool> checkOut(params) async {
+    var response = await repository.post(
+        endpoint: 'shopping-lists/check-out', body: params);
+    if (response.statusCode != 201) return false;
+    print(response);
+    return true;
+    // return ApiResponse.fromJson(response.data);
+  }
+
   Future<List<ShoppingLists>> listar({Map<String, dynamic> query}) async {
     List<ShoppingLists> shoppingCarts = [];
     var response =

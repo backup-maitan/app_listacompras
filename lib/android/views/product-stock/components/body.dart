@@ -1,5 +1,3 @@
-import 'package:app_notes/android/views/cart/cart.view.dart';
-import 'package:app_notes/android/widgets/icon_btn_with_counter.dart';
 import 'package:app_notes/android/widgets/loader.widget.dart';
 import 'package:app_notes/controllers/product.controller.dart';
 import 'package:app_notes/controllers/shopping-cart.controller.dart';
@@ -12,7 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class Body extends StatelessWidget {
-  final ProductController productController = Get.put(ProductController());
+  final ProductController productController = Get.find();
   final ShoppingCartController shoppingCartController =
       Get.put(ShoppingCartController());
 
@@ -22,7 +20,7 @@ class Body extends StatelessWidget {
     return GetX<ProductController>(
       init: productController,
       initState: (_) async {
-        await productController.listar();
+        await productController.findByUser();
         await shoppingCartController.getItems();
       },
       builder: (_) {
@@ -36,28 +34,22 @@ class Body extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.orange,
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(0, 5),
-                          blurRadius: 10,
-                          color: Color(0xFF000000).withOpacity(0.15),
-                        )
-                      ],
+                      color: Colors.white,
                     ),
                     child: Column(
                       children: [
                         SizedBox(
-                          height: getProportionateScreenWidth(20),
+                          height: getProportionateScreenWidth(10),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: getProportionateScreenWidth(20)),
+                              horizontal: getProportionateScreenWidth(20),
+                              vertical: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                width: SizeConfig.screenWidth * 0.6,
+                                width: SizeConfig.screenWidth * 0.88,
                                 height: 50,
                                 decoration: BoxDecoration(
                                   color: kPrimaryLightColor,
@@ -78,14 +70,14 @@ class Body extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              IconBtnWithCounter(
-                                svgSrc: "assets/icons/Cart Icon.svg",
-                                numOfItems:
-                                    shoppingCartController.quantityItems,
-                                press: () {
-                                  Get.to(CartView());
-                                },
-                              )
+                              // IconBtnWithCounter(
+                              //   svgSrc: "assets/icons/Cart Icon.svg",
+                              //   numOfItems:
+                              //       shoppingCartController.quantityItems,
+                              //   press: () {
+                              //     Get.to(CartView());
+                              //   },
+                              // )
                               // ,
                               // IconBtnWithCounter(
                               //   svgSrc: "assets/icons/User.svg",
@@ -97,23 +89,23 @@ class Body extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(
-                                  getProportionateScreenWidth(20)),
-                              child: Text(
-                                "Estoque de produtos",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: getProportionateScreenWidth(18),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                        // Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     Padding(
+                        //       padding: EdgeInsets.all(
+                        //           getProportionateScreenWidth(20)),
+                        //       child: Text(
+                        //         "Estoque de produtos",
+                        //         style: TextStyle(
+                        //           color: Colors.white,
+                        //           fontWeight: FontWeight.w600,
+                        //           fontSize: getProportionateScreenWidth(18),
+                        //         ),
+                        //       ),
+                        //     )
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),
@@ -122,7 +114,7 @@ class Body extends StatelessWidget {
                       : Expanded(
                           child: RefreshIndicator(
                             onRefresh: () async {
-                              await productController.listar();
+                              await productController.findByUser();
                               await shoppingCartController.getItems();
                             },
                             color: Colors.black,
@@ -215,6 +207,16 @@ class Body extends StatelessWidget {
                                     ),
                                     title: Text(
                                         productController.products[index].name),
+                                    subtitle: Text.rich(
+                                      TextSpan(
+                                        text:
+                                            "x${productController.products[index].quantity}",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: kPrimaryColor),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

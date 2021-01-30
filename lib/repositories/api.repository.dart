@@ -1,19 +1,22 @@
+import 'package:app_notes/repositories/storage.repository.dart';
 import 'package:dio/dio.dart';
 import 'package:app_notes/utils/constantes.dart';
+import 'package:get/get.dart' hide Response;
 
 class ApiRepository {
   Dio dio = Dio();
 
-  // StorageRepository storageRepository = Get.put(StorageRepository());
+  StorageRepository storageRepository = Get.put(StorageRepository());
 
   Future<Response> get(
       {String endpoint, Map<String, dynamic> parameters}) async {
-    // var token = await storageRepository.obter(key: 'token');
+    var payload = await storageRepository.getJwtPayload();
 
     var response = await fetch(() => dio.get(
           '${Constantes.urlAPI}/$endpoint',
           queryParameters: parameters,
-          // options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options:
+              Options(headers: {'Authorization': 'Bearer ${payload.token}'}),
         ));
 
     if (response != null && response.statusCode == 401) {
@@ -25,32 +28,36 @@ class ApiRepository {
   }
 
   Future<Response> post({String endpoint, dynamic body}) async {
-    // var token = await storageRepository.obter(key: 'token');
+    var payload = await storageRepository.getJwtPayload();
 
     return await fetch(() => dio.post(
           '${Constantes.urlAPI}/$endpoint',
           data: body,
-          // options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options: payload != null
+              ? Options(headers: {'Authorization': 'Bearer ${payload.token}'})
+              : {},
         ));
   }
 
   Future<Response> put({String endpoint, dynamic body}) async {
-    // var token = await storageRepository.obter(key: 'token');
+    var payload = await storageRepository.getJwtPayload();
 
     return await fetch(() => dio.put(
           '${Constantes.urlAPI}/$endpoint',
           data: body,
-          // options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options:
+              Options(headers: {'Authorization': 'Bearer ${payload.token}'}),
         ));
   }
 
   Future<Response> delete({String endpoint, dynamic body}) async {
-    // var token = await storageRepository.obter(key: 'token');
+    var payload = await storageRepository.getJwtPayload();
 
     return await fetch(() => dio.delete(
           '${Constantes.urlAPI}/$endpoint',
           data: body,
-          // options: Options(headers: {'Authorization': 'Bearer $token'}),
+          options:
+              Options(headers: {'Authorization': 'Bearer ${payload.token}'}),
         ));
   }
 

@@ -5,17 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:app_notes/android/widgets/icon_btn_with_counter.dart';
 import 'package:get/get.dart';
+import 'package:app_notes/controllers/auth.controller.dart';
 
 class Body extends StatelessWidget {
   final ProductController productController = Get.put(ProductController());
   final ShoppingCartController shoppingCartController =
       Get.put(ShoppingCartController());
+  final AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
+    var name = authController.userStorage.value.name;
     return GetX(
       init: productController,
       initState: (_) async {
-        await productController.listar();
+        await productController.findByUser();
         await shoppingCartController.getItems();
       },
       builder: (_) {
@@ -35,7 +38,7 @@ class Body extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          "Olá, Ricardo",
+                          "Olá, $name",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,

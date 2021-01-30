@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:app_notes/dto/jwt-payload.dart';
 import 'package:app_notes/dto/storage.dto.dart';
 import 'package:app_notes/models/shopping-cart.model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,6 +38,7 @@ class StorageRepository {
 
   Future<bool> getIsLogged() async {
     var user = await getDataUser();
+    print(user);
     return user.isLogged;
   }
 
@@ -45,5 +47,11 @@ class StorageRepository {
     print(user);
     user = StorageDTO.fromJson(user);
     return user;
+  }
+
+  Future<JWTPayload> getJwtPayload() async {
+    var dataUser = await getDataUser();
+    print(dataUser);
+    return dataUser.payload;
   }
 }

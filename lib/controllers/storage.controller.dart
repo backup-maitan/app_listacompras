@@ -7,6 +7,7 @@ class StorageController extends GetxController {
 
   setStorageDefault() async {
     var dataUser = await storageRepository.read('dataUser');
+    print(dataUser);
     if (dataUser == null) {
       await storageRepository.save(
         key: 'dataUser',

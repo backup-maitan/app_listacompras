@@ -1,8 +1,10 @@
 import 'package:app_notes/dto/add-item-cart.dto.dart';
+import 'package:app_notes/dto/checkout.dto.dart';
 import 'package:app_notes/models/shopping-cart-items.model.dart';
 import 'package:app_notes/models/shopping-cart.model.dart';
 import 'package:app_notes/repositories/shopping-cart.repository.dart';
 import 'package:app_notes/repositories/storage.repository.dart';
+import 'package:app_notes/utils/util.dart';
 import 'package:get/get.dart';
 
 class ShoppingCartController extends GetxController {
@@ -46,7 +48,7 @@ class ShoppingCartController extends GetxController {
     this.carregando.value = true;
     shoppingCartItems
         .assignAll(await shoppingCartRepository.getCartItems(shoppingList.id));
-    await Future.delayed(Duration(seconds: 3)); // remover depois
+
     this.carregando.value = false;
   }
 
@@ -60,11 +62,25 @@ class ShoppingCartController extends GetxController {
     var shoppingList = await firstShoppingLists();
     addItemToCartDTO.shoppingListId = shoppingList.id;
 
+    print(addItemToCartDTO);
+
     var response =
         await shoppingCartRepository.addItemToCart(addItemToCartDTO.toJson());
     if (response) {
       getItemWithOutLoader();
       // exibirSnack('Sucesso', 'Item adicionado ao carrinho');
+    }
+  }
+
+  checkOut() async {
+    var shoppingList = await firstShoppingLists();
+    var response = await shoppingCartRepository
+        .checkOut(CheckoutDTO(shoppingListId: shoppingList.id));
+    if (response) {
+      carregando.value = true;
+      exibirSnack('Sucesso', 'Compra finalizada.');
+      await Future.delayed(Duration(seconds: 3));
+      Get.offNamed('/product-stock');
     }
   }
 }

@@ -24,7 +24,10 @@ class ProfileView extends StatelessWidget {
         ),
         title: Text(
           "Meu Perfil",
-          style: TextStyle(color: Colors.white, fontFamily: 'Muli'),
+          style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Muli'),
         ),
       ),
       body: Body(),
