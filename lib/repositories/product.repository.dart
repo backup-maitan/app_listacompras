@@ -1,12 +1,13 @@
 import 'package:app_notes/models/product.model.dart';
 import 'package:app_notes/repositories/api.repository.dart';
 import 'package:app_notes/repositories/storage.repository.dart';
+import 'package:app_notes/dto/create-product.dto.dart';
 
 class ProductRepository {
   ApiRepository repository = ApiRepository();
   StorageRepository storageRepository = StorageRepository();
 
-  Future<bool> adicionar(params) async {
+  Future<bool> adicionar({CreateProductDTO params}) async {
     var response = await repository.post(endpoint: 'products', body: params);
     if (response.statusCode != 201) return false;
     return true;

@@ -1,6 +1,8 @@
 import 'package:app_notes/models/product.model.dart';
 import 'package:get/get.dart';
+import 'package:app_notes/utils/util.dart';
 import 'package:app_notes/repositories/product.repository.dart';
+import 'package:app_notes/dto/create-product.dto.dart';
 
 class ProductController extends GetxController {
   ProductRepository productRepository = ProductRepository();
@@ -22,9 +24,12 @@ class ProductController extends GetxController {
     carregando.value = false;
   }
 
-  add(Product categoria) async {
-    var response = await productRepository.adicionar(categoria.toJson());
-    if (response) listar();
+  add(CreateProductDTO productDTO) async {
+    var response = await productRepository.adicionar(params: productDTO);
+    if (response) {
+      listar();
+    }
+    return response;
   }
 
 // obterProduto(String produtoId, String estabelecimentoId) async {

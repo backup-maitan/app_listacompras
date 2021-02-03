@@ -1,7 +1,7 @@
 import 'package:app_notes/android/views/todo.view.dart';
 import 'package:app_notes/android/widgets/header.widget.dart';
 import 'package:app_notes/controllers/product.controller.dart';
-import 'package:app_notes/models/product.model.dart';
+import 'package:app_notes/dto/create-product.dto.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:app_notes/android/widgets/default_button.widget.dart';
@@ -43,9 +43,10 @@ class HomeTodoView extends StatelessWidget {
                       text: "Confirmar",
                       press: () {
                         productController.add(
-                          new Product(
+                          new CreateProductDTO(
                             /*  user_id: 1,*/
                             name: textEditingController.text,
+                            // quantity: textEditingController.
                           ),
                         );
                         // categoriaController.listar();

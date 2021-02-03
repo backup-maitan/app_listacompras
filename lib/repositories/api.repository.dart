@@ -1,6 +1,8 @@
+import 'package:app_notes/dto/storage.dto.dart';
 import 'package:app_notes/repositories/storage.repository.dart';
 import 'package:dio/dio.dart';
 import 'package:app_notes/utils/constantes.dart';
+import 'dart:convert';
 import 'package:get/get.dart' hide Response;
 
 class ApiRepository {
@@ -20,8 +22,10 @@ class ApiRepository {
         ));
 
     if (response != null && response.statusCode == 401) {
-      // var novoToken = await obterToken(token);
-      // await storageRepository.inserir(key: 'token', value: novoToken);
+      var novoToken = await refreshToken(payload.token);
+      var dataUser = await storageRepository.getDataUser();
+      dataUser.payload = novoToken;
+      await storageRepository.save(key: 'dataUser', value: dataUser);
     }
 
     return response;
@@ -78,11 +82,13 @@ class ApiRepository {
   //   throw UnknownException(message: e.toString());
   // }
 
-  // obterToken(String token) async {
-  //   if (token == null)
-  //     goTo('/login');
-  //   else
-  //     return await fetch(() => dio.get('${Constants.apiUrl}/obter-token',
-  //         options: Options(headers: {'Authorization': 'Bearer $token'})));
-  // }
+  refreshToken(String token) async {
+    print('refresh');
+    if (token == null) {
+      // goTo('/login');
+    } else
+      return await fetch(() => dio.post('${Constantes.urlAPI}/auth/refresh',
+          data: {"refresh_token": token},
+          options: Options(headers: {'Authorization': 'Bearer $token'})));
+  }
 }
