@@ -1,6 +1,6 @@
 class StorageShoppingListsDTO {
-  int id;
-  String name;
+  int? id;
+  String? name;
 
   StorageShoppingListsDTO({
     this.id,

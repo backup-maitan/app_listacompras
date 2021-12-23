@@ -1,7 +1,7 @@
 class JWTPayload {
-  String type;
-  String token;
-  String refreshToken;
+  String? type;
+  String? token;
+  String? refreshToken;
 
   JWTPayload({this.type, this.token, this.refreshToken});
 

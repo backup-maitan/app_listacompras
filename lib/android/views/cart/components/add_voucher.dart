@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 
 class AddVoucher extends StatelessWidget {
   const AddVoucher({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

@@ -14,8 +14,8 @@ class ShoppingCartController extends GetxController {
   RxBool carregando = true.obs;
 
   Rx<ShoppingLists> shoppingList = ShoppingLists().obs;
-  RxList<ShoppingLists> shoppingLists = List<ShoppingLists>().obs;
-  RxList<ShoppingListsItems> shoppingCartItems = List<ShoppingListsItems>().obs;
+  RxList<ShoppingLists> shoppingLists = List<ShoppingLists>.empty().obs;
+  RxList<ShoppingListsItems> shoppingCartItems = List<ShoppingListsItems>.empty().obs;
 
   int get quantityItems {
     return carregando.value ? 0 : shoppingCartItems.length;
@@ -23,7 +23,7 @@ class ShoppingCartController extends GetxController {
 
   int get unity {
     return shoppingCartItems.fold(
-        0, (prevValue, element) => prevValue + element.quantity);
+        0, (prevValue, element) => prevValue + element.quantity!);
   }
 
   // listar() async {
@@ -40,7 +40,7 @@ class ShoppingCartController extends GetxController {
 
   Future<ShoppingLists> firstShoppingLists() async {
     var shoppingLists = await storageRepository.getShoppingLists();
-    return shoppingLists.first;
+    return shoppingLists.length > 0 ? shoppingLists.first : new ShoppingLists();
   }
 
   getItems() async {

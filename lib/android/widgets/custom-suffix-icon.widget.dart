@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 
 class CustomSuffixIcon extends StatelessWidget {
   const CustomSuffixIcon({
-    Key key,
-    @required this.svgIcon,
+    Key? key,
+    required this.svgIcon,
   }) : super(key: key);
 
   final String svgIcon;

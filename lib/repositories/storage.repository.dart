@@ -8,10 +8,10 @@ class StorageRepository {
   read(String key) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (!sharedPreferences.containsKey(key)) return null;
-    return json.decode(sharedPreferences.getString(key));
+    return json.decode(sharedPreferences.getString(key)!);
   }
 
-  save({String key, value}) async {
+  save({required String key, value}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setString(key, json.encode(value));
   }
@@ -21,13 +21,13 @@ class StorageRepository {
     sharedPreferences.remove(key);
   }
 
-  setDataUser({String value}) async {
+  setDataUser({String? value}) async {
     return await save(key: 'dataUser', value: value);
   }
 
   Future<List<ShoppingLists>> getShoppingLists() async {
     var dataUser = await read('dataUser');
-    var shoppingLists = new List<ShoppingLists>();
+    var shoppingLists = new List<ShoppingLists>.empty();
     if (dataUser['shoppingLists'] != null) {
       dataUser['shoppingLists'].forEach((v) {
         shoppingLists.add(new ShoppingLists.fromJson(v));
@@ -36,7 +36,7 @@ class StorageRepository {
     return shoppingLists;
   }
 
-  Future<bool> getIsLogged() async {
+  Future<bool?> getIsLogged() async {
     var user = await getDataUser();
     print(user);
     return user.isLogged;
@@ -49,7 +49,7 @@ class StorageRepository {
     return user;
   }
 
-  Future<JWTPayload> getJwtPayload() async {
+  Future<JWTPayload?> getJwtPayload() async {
     var dataUser = await getDataUser();
     print(dataUser);
     return dataUser.payload;

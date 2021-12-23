@@ -1,8 +1,8 @@
 class CreateProductDTO {
-  int id;
-  String name;
-  int quantity;
-  int userId;
+  int? id;
+  String? name;
+  int? quantity;
+  int? userId;
 
   CreateProductDTO({this.id, this.name, this.quantity, this.userId});
 

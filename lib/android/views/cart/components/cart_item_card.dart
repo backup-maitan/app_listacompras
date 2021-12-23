@@ -6,13 +6,13 @@ import 'package:flutter_svg/svg.dart';
 
 class CartItemCard extends StatelessWidget {
   const CartItemCard({
-    Key key,
-    @required this.cart,
+    Key? key,
+    required this.cart,
     this.quantity,
   }) : super(key: key);
 
   final Product cart;
-  final int quantity;
+  final int? quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class CartItemCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: cart.image != null
-                  ? Image.network(cart.image)
+                  ? Image.network(cart.image!)
                   : SvgPicture.asset(
                       "assets/icons/no-photo.svg",
                       color: Colors.grey,
@@ -46,7 +46,7 @@ class CartItemCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              cart.name,
+              cart.name!,
               style: TextStyle(fontSize: 16, color: Colors.black),
               maxLines: 2,
             ),

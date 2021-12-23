@@ -12,7 +12,7 @@ class Loader extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetX(
       init: controller,
-      builder: (_) {
+      builder: (dynamic _) {
         return Center(
           child: Container(
             width: 120.0,
@@ -120,11 +120,11 @@ class Loader extends StatelessWidget {
 
 class LoaderController extends GetxController
     with SingleGetTickerProviderMixin {
-  AnimationController controller;
+  late AnimationController controller;
 
-  Animation<double> animation_rotation;
-  Animation<double> animation_radius_in;
-  Animation<double> animation_radius_out;
+  late Animation<double> animation_rotation;
+  late Animation<double> animation_radius_in;
+  late Animation<double> animation_radius_out;
 
   final double initialRadius = 35.0;
   RxDouble radius = 0.0.obs;
@@ -171,8 +171,8 @@ class LoaderController extends GetxController
 }
 
 class Dot extends StatelessWidget {
-  final double radius;
-  final Color color;
+  final double? radius;
+  final Color? color;
 
   Dot({this.radius, this.color});
 

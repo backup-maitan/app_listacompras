@@ -5,15 +5,15 @@ import 'package:get/get.dart';
 
 class TodoView extends StatelessWidget {
   final TodoController todoController = Get.find();
-  final int index;
+  final int? index;
 
   TodoView({this.index});
 
   @override
   Widget build(BuildContext context) {
-    String text = '';
+    String? text = '';
     if (!this.index.isNull) {
-      text = todoController.todos[index].text;
+      text = todoController.todos[index!].text;
     }
     TextEditingController textEditingController =
         TextEditingController(text: text);

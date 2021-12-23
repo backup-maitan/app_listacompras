@@ -73,15 +73,15 @@ class CartView extends StatelessWidget {
 
 class CheckOurCard extends StatelessWidget {
   const CheckOurCard({
-    Key key,
+    Key? key,
     this.shoppingCartController,
     this.totalItems,
     this.totalQuantidade,
   }) : super(key: key);
 
-  final ShoppingCartController shoppingCartController;
-  final int totalItems;
-  final int totalQuantidade;
+  final ShoppingCartController? shoppingCartController;
+  final int? totalItems;
+  final int? totalQuantidade;
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +142,7 @@ class CheckOurCard extends StatelessWidget {
                   child: DefaultButton(
                     text: "Finalizar",
                     press: () async {
-                      await this.shoppingCartController.checkOut();
+                      await this.shoppingCartController!.checkOut();
                     },
                   ),
                 )

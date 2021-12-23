@@ -1,9 +1,9 @@
 import 'package:app_notes/models/product.model.dart';
 
 class ShoppingListsItems {
-  int id;
-  int quantity;
-  Product product;
+  int? id;
+  int? quantity;
+  Product? product;
 
   ShoppingListsItems({
     this.id,
@@ -23,7 +23,7 @@ class ShoppingListsItems {
     data['id'] = this.id;
     data['quantity'] = this.quantity;
     if (this.product != null) {
-      data['product'] = this.product.toJson();
+      data['product'] = this.product!.toJson();
     }
     return data;
   }

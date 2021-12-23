@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_notes/dto/storage.dto.dart';
 import 'package:app_notes/repositories/api.repository.dart';
 import 'package:app_notes/repositories/storage.repository.dart';
@@ -10,13 +12,13 @@ class AutenticacaoRepository {
   ApiRepository repository = ApiRepository();
   StorageRepository storageRepository = StorageRepository();
 
-  Future<ApiResponse> login({String email, String password}) async {
+  Future<ApiResponse> login({String? email, String? password}) async {
     var retorno = await this.dio.post('${Constantes.urlAPI}/auth/login',
         data: {'email': email, 'password': password});
 
     ApiResponse apiResponse = ApiResponse.fromJson(retorno.data);
 
-    if (!apiResponse.success) return apiResponse;
+    if (!apiResponse.success!) return apiResponse;
 
     apiResponse.data['isLogged'] = apiResponse.success;
     StorageDTO storage = StorageDTO.fromJson(apiResponse.data);
@@ -27,18 +29,18 @@ class AutenticacaoRepository {
   }
 
   Future<ApiResponse> register(
-      {String name, String email, String password}) async {
-    var retorno = await repository.post(
+      {String? name, String? email, String? password}) async {
+    var retorno = await (repository.post(
       endpoint: 'users',
       body: {
         'name': name,
         'email': email,
         'password': password,
       },
-    );
+    ) as FutureOr<Response<dynamic>>);
 
     ApiResponse apiResponse = ApiResponse.fromJson(retorno.data);
-    if (!apiResponse.success) return apiResponse;
+    if (!apiResponse.success!) return apiResponse;
 
     return apiResponse;
   }

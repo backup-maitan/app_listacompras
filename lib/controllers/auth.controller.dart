@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_notes/repositories/auth.repository.dart';
 import 'package:app_notes/repositories/storage.repository.dart';
 import 'package:app_notes/utils/errors.dart';
@@ -10,15 +12,15 @@ class AuthController extends GetxController {
   AutenticacaoRepository repository = AutenticacaoRepository();
   StorageRepository storageRepository = StorageRepository();
 
-  RxList<Errors> errors = List<Errors>().obs;
+  RxList<Errors> errors = List<Errors>.empty().obs;
   // RxBool isLogged = false.obs;
 
-  Rx<StorageUsuarioDTO> userStorage = StorageUsuarioDTO().obs;
+  Rx<StorageUsuarioDTO?> userStorage = StorageUsuarioDTO().obs;
 
   checkIsLogged() async {
-    var isLogged = await storageRepository.getIsLogged();
+    var isLogged = await (storageRepository.getIsLogged());
     print(isLogged);
-    if (isLogged) {
+    if (isLogged != null && isLogged) {
       var dataUser = await storageRepository.getDataUser();
       userStorage.value = dataUser.user;
       Get.offNamed('/home');
@@ -27,11 +29,11 @@ class AuthController extends GetxController {
     }
   }
 
-  authenticate({String email, String password}) async {
+  authenticate({String? email, String? password}) async {
     ApiResponse apiResponse =
         await this.repository.login(email: email, password: password);
 
-    if (!apiResponse.success) {
+    if (!apiResponse.success!) {
       exibirSnack(
           'Não foi possivel realizar o login', "Verifique o email/senha.");
       return;
@@ -42,15 +44,15 @@ class AuthController extends GetxController {
     return apiResponse;
   }
 
-  register({String name, String email, String password}) async {
+  register({String? name, String? email, String? password}) async {
     ApiResponse apiResponse = await this.repository.register(
           name: name,
           email: email,
           password: password,
         );
 
-    if (!apiResponse.success) {
-      exibirSnack('Ocorreu um erro', apiResponse.message);
+    if (!apiResponse.success!) {
+      exibirSnack('Ocorreu um erro', apiResponse.message!);
     }
 
     exibirSnack('Sucesso', 'Cadastro realizado');

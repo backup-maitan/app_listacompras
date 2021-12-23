@@ -14,14 +14,14 @@ class Body extends StatelessWidget {
   final AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
-    var name = authController.userStorage.value.name;
+    var name = authController.userStorage.value!.name;
     return GetX(
       init: productController,
       initState: (_) async {
         await productController.findByUser();
         await shoppingCartController.getItems();
       },
-      builder: (_) {
+      builder: (dynamic _) {
         return Container(
           decoration: BoxDecoration(
             gradient: kPrimaryGradientColor,
@@ -128,12 +128,12 @@ class Body extends StatelessWidget {
 }
 
 class CardDashboardMenuItem extends StatelessWidget {
-  String menuTitle;
-  String menuSubTitle;
-  String svgSrc;
+  String? menuTitle;
+  String? menuSubTitle;
+  String? svgSrc;
 
   CardDashboardMenuItem({
-    Key key,
+    Key? key,
     this.menuTitle,
     this.menuSubTitle,
     this.svgSrc,
@@ -171,7 +171,7 @@ class CardDashboardMenuItem extends StatelessWidget {
                     Row(
                       children: [
                         SvgPicture.asset(
-                          svgSrc,
+                          svgSrc!,
                           width: 52.0,
                           height: 52.0,
                         ),
@@ -182,7 +182,7 @@ class CardDashboardMenuItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              menuTitle,
+                              menuTitle!,
                               style: TextStyle(
                                   color: Colors.orange,
                                   fontSize: 20,
@@ -190,7 +190,7 @@ class CardDashboardMenuItem extends StatelessWidget {
                             ),
                             if (this.menuSubTitle != null)
                               Text(
-                                this.menuSubTitle,
+                                this.menuSubTitle!,
                                 style: TextStyle(
                                     color: Colors.grey,
                                     fontSize: 16,

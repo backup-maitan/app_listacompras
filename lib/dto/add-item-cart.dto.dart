@@ -1,7 +1,7 @@
 class AddItemToCartDTO {
-  int productId;
-  int shoppingListId;
-  int quantity;
+  int? productId;
+  int? shoppingListId;
+  int? quantity;
 
   AddItemToCartDTO({
     this.productId,

@@ -10,7 +10,7 @@ class ProductController extends GetxController {
   RxBool carregando = true.obs;
 
   Rx<Product> product = Product().obs;
-  RxList<Product> products = List<Product>().obs;
+  RxList<Product> products = List<Product>.empty().obs;
 
   listar() async {
     carregando.value = true;

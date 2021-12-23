@@ -1,11 +1,11 @@
 import 'package:app_notes/models/shopping-cart-items.model.dart';
 
 class ShoppingLists {
-  int id;
-  String name;
-  String image;
-  List<ShoppingListsItems> shoppingListsItems;
-  int numOfItems;
+  int? id;
+  String? name;
+  String? image;
+  List<ShoppingListsItems>? shoppingListsItems;
+  int? numOfItems;
 
   ShoppingLists({
     this.id,
@@ -19,9 +19,9 @@ class ShoppingLists {
     name = json['name'];
     image = json['image'];
     if (json['shoppingListsItems'] != null) {
-      shoppingListsItems = new List<ShoppingListsItems>();
+      shoppingListsItems = new List<ShoppingListsItems>.empty();
       json['shoppingCartsItems'].forEach((v) {
-        shoppingListsItems.add(new ShoppingListsItems.fromJson(v));
+        shoppingListsItems!.add(new ShoppingListsItems.fromJson(v));
       });
     }
     numOfItems = json['numOfItems'];
@@ -34,7 +34,7 @@ class ShoppingLists {
     data['image'] = this.image;
     if (this.shoppingListsItems != null) {
       data['shoppingListsItems'] =
-          this.shoppingListsItems.map((v) => v.toJson()).toList();
+          this.shoppingListsItems!.map((v) => v.toJson()).toList();
     }
     data['numOfItems'] = this.numOfItems;
     return data;

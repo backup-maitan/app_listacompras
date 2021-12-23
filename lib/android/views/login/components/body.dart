@@ -44,7 +44,7 @@ class Body extends StatelessWidget {
 
 class NoAccountText extends StatelessWidget {
   const NoAccountText({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -71,32 +71,32 @@ class NoAccountText extends StatelessWidget {
 }
 
 class LoginForm extends StatelessWidget {
-  TextEditingController email = TextEditingController();
-  TextEditingController pass = TextEditingController();
-  final AuthController authController = Get.put(AuthController());
+  TextEditingController? email = TextEditingController();
+  TextEditingController? pass = TextEditingController();
+  final AuthController? authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return GetBuilder(
-      builder: (_) {
+    return GetBuilder<AuthController>(
+      builder: (dynamic _) {
         return Column(
           children: [
             buildEmailFormField(),
             SizedBox(height: getProportionateScreenHeight(30)),
             buildPasswordFormField(),
             SizedBox(height: getProportionateScreenHeight(30)),
-            // Container(
-            //   height: 200,
-            //   child: FormError(),
-            // ),
+            Container(
+              height: 200,
+              child: FormError(),
+            ),
             SizedBox(height: getProportionateScreenHeight(30)),
             DefaultButton(
               text: "Continuar",
               press: () async {
-                await authController.authenticate(
-                  email: email.text,
-                  password: pass.text,
+                await authController!.authenticate(
+                  email: email!.text,
+                  password: pass!.text,
                 );
               },
             )
@@ -139,43 +139,43 @@ class LoginForm extends StatelessWidget {
   }
 }
 
-// class FormError extends StatelessWidget {
-//   const FormError({
-//     Key key,
-//   }) : super(key: key);
+class FormError extends StatelessWidget {
+  const FormError({
+    Key? key,
+  }) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     // final AuthController authController = Get.put(AuthController());
-//     SizeConfig().init(context);
-//     return GetBuilder<AuthController>(
-//       init: AuthController(),
-//       builder: (controller) {
-//         return Obx(
-//           () => ListView.builder(
-//               itemCount: controller.errors.length,
-//               itemBuilder: (ctx, index) {
-//                 return Text(controller.errors[index].message);
-//               }),
-//         );
-//       },
-//     );
-//   }
+  @override
+  Widget build(BuildContext context) {
+    // final AuthController authController = Get.put(AuthController());
+    SizeConfig().init(context);
+    return GetBuilder<AuthController>(
+      init: AuthController(),
+      builder: (controller) {
+        return Obx(
+          () => ListView.builder(
+              itemCount: controller.errors.length,
+              itemBuilder: (ctx, index) {
+                return Text(controller.errors[index].message);
+              }),
+        );
+      },
+    );
+  }
 
-//   Row formErrorText({String error}) {
-//     print(error);
-//     return Row(
-//       children: [
-//         SvgPicture.asset(
-//           "assets/icons/Error.svg",
-//           height: getProportionateScreenWidth(14),
-//           width: getProportionateScreenWidth(14),
-//         ),
-//         SizedBox(
-//           width: getProportionateScreenWidth(10),
-//         ),
-//         Text(error),
-//       ],
-//     );
-//   }
-// }
+  Row formErrorText({String? error}) {
+    print(error);
+    return Row(
+      children: [
+        SvgPicture.asset(
+          "assets/icons/Error.svg",
+          height: getProportionateScreenWidth(14),
+          width: getProportionateScreenWidth(14),
+        ),
+        SizedBox(
+          width: getProportionateScreenWidth(10),
+        ),
+        Text(error!),
+      ],
+    );
+  }
+}

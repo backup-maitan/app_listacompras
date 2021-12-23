@@ -125,7 +125,7 @@ class HomeTodoView extends StatelessWidget {
                         separatorBuilder: (_, __) => Divider(),
                         itemBuilder: (context, index) => ListTile(
                           title: Text(
-                            productController.products[index].name,
+                            productController.products[index].name!,
                           ),
                           onTap: () {
                             Get.to(HomeTodoView());

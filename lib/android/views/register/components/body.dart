@@ -46,8 +46,8 @@ class RegisterForm extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return GetBuilder(
-      builder: (_) {
+    return GetBuilder<AuthController>(
+      builder: (dynamic _) {
         return Column(
           children: [
             SizedBox(height: getProportionateScreenHeight(30)),

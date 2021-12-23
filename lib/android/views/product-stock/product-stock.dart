@@ -79,7 +79,7 @@ class ProductStockView extends StatelessWidget {
                           var storage = await storageController.getDataUser();
                           var result = await this.productController.add(
                                 new CreateProductDTO(
-                                  userId: storage.user.id,
+                                  userId: storage.user!.id,
                                   name: name.text,
                                   quantity: int.parse(quantity.text),
                                 ),

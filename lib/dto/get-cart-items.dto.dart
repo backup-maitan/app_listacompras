@@ -1,14 +1,14 @@
 class GetCartItemsDTO {
-  String shoppingCartItemCreatedAt;
-  String shoppingCartItemUpdatedAt;
+  String? shoppingCartItemCreatedAt;
+  String? shoppingCartItemUpdatedAt;
   Null shoppingCartItemDeletedAt;
-  int shoppingCartItemId;
-  int shoppingCartItemProductId;
-  int shoppingCartItemShoppingCartId;
-  int productId;
-  String productName;
-  String productImage;
-  String quantity;
+  int? shoppingCartItemId;
+  int? shoppingCartItemProductId;
+  int? shoppingCartItemShoppingCartId;
+  int? productId;
+  String? productName;
+  String? productImage;
+  String? quantity;
 
   GetCartItemsDTO({this.shoppingCartItemCreatedAt,
     this.shoppingCartItemUpdatedAt,

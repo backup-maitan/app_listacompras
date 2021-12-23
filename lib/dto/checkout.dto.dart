@@ -1,5 +1,5 @@
 class CheckoutDTO {
-  int shoppingListId;
+  int? shoppingListId;
 
   CheckoutDTO({
     this.shoppingListId,

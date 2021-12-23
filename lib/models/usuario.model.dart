@@ -1,8 +1,8 @@
 class Usuario {
-  int id;
-  String name;
-  String email;
-  String password;
+  int? id;
+  String? name;
+  String? email;
+  String? password;
 
   Usuario({this.id, this.name, this.email, this.password});
 

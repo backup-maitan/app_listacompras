@@ -12,7 +12,7 @@ exibirSnack(String titulo, String mensagem) {
         backgroundColor: Colors.black,
         duration: Duration(seconds: 3),
         colorText: Colors.white,
-        dismissDirection: SnackDismissDirection.HORIZONTAL,
+        dismissDirection: DismissDirection.horizontal,
         animationDuration: Duration(
           milliseconds: 300,
         ));

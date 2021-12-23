@@ -1,24 +1,27 @@
+import 'dart:async';
+
 import 'package:app_notes/models/product.model.dart';
 import 'package:app_notes/repositories/api.repository.dart';
 import 'package:app_notes/repositories/storage.repository.dart';
 import 'package:app_notes/dto/create-product.dto.dart';
+import 'package:dio/dio.dart';
 
 class ProductRepository {
   ApiRepository repository = ApiRepository();
   StorageRepository storageRepository = StorageRepository();
 
-  Future<bool> adicionar({CreateProductDTO params}) async {
-    var response = await repository.post(endpoint: 'products', body: params);
+  Future<bool> adicionar({CreateProductDTO? params}) async {
+    var response = await (repository.post(endpoint: 'products', body: params) as FutureOr<Response<dynamic>>);
     if (response.statusCode != 201) return false;
     return true;
     // return ApiResponse.fromJson(response.data);
   }
 
-  Future<List<Product>> findByUser({Map<String, dynamic> query}) async {
+  Future<List<Product>> findByUser({Map<String, dynamic>? query}) async {
     List<Product> products = [];
     var dataUser = await this.storageRepository.getDataUser();
     var response = await repository.get(
-        endpoint: 'products/user/${dataUser.user.id}', parameters: query);
+        endpoint: 'products/user/${dataUser.user!.id}', parameters: query);
 
     if (response != null && response.statusCode == 200)
       for (var item in (response.data as List)) {
@@ -28,7 +31,7 @@ class ProductRepository {
     return products;
   }
 
-  Future<List<Product>> listar({Map<String, dynamic> query}) async {
+  Future<List<Product>> listar({Map<String, dynamic>? query}) async {
     List<Product> categorias = [];
     var response =
         await repository.get(endpoint: 'products', parameters: query);

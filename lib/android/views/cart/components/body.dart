@@ -17,7 +17,7 @@ class Body extends StatelessWidget {
       padding: EdgeInsets.only(top: 10),
       child: ListView.builder(
         itemBuilder: (context, index) {
-          var product = shoppingCartController.shoppingCartItems[index].product;
+          var product = shoppingCartController.shoppingCartItems[index].product!;
           var quantity =
               shoppingCartController.shoppingCartItems[index].quantity;
           return Padding(
@@ -60,7 +60,7 @@ class Body extends StatelessWidget {
                               AddItemToCartDTO(
                                   productId: product.id,
                                   quantity: shoppingCartController
-                                          .shoppingCartItems[index].quantity +
+                                          .shoppingCartItems[index].quantity! +
                                       1),
                             );
                           },
@@ -84,7 +84,7 @@ class Body extends StatelessWidget {
                               AddItemToCartDTO(
                                   productId: product.id,
                                   quantity: shoppingCartController
-                                          .shoppingCartItems[index].quantity -
+                                          .shoppingCartItems[index].quantity! -
                                       1),
                             );
                           },

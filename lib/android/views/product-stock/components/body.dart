@@ -206,7 +206,7 @@ class Body extends StatelessWidget {
                                       ),
                                     ),
                                     title: Text(
-                                        productController.products[index].name),
+                                        productController.products[index].name!),
                                     subtitle: Text.rich(
                                       TextSpan(
                                         text:

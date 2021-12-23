@@ -1,8 +1,8 @@
 class Product {
-  int id;
-  String name;
-  int quantity;
-  String image;
+  int? id;
+  String? name;
+  int? quantity;
+  String? image;
 
   // int user_id;
 

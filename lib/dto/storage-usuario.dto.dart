@@ -1,6 +1,6 @@
 class StorageUsuarioDTO {
-  int id;
-  String name;
+  int? id;
+  String? name;
 
   StorageUsuarioDTO({this.id, this.name});
 
