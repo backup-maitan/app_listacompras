@@ -30,16 +30,16 @@ class AutenticacaoRepository {
 
   Future<ApiResponse> register(
       {String? name, String? email, String? password}) async {
-    var retorno = await (repository.post(
-      endpoint: 'users',
+    var retorno = await repository.post(
+      endpoint: 'auth/register',
       body: {
         'name': name,
         'email': email,
         'password': password,
       },
-    ) as FutureOr<Response<dynamic>>);
+    );
 
-    ApiResponse apiResponse = ApiResponse.fromJson(retorno.data);
+    ApiResponse apiResponse = ApiResponse.fromJson(retorno?.data);
     if (!apiResponse.success!) return apiResponse;
 
     return apiResponse;

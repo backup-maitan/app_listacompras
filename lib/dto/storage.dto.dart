@@ -24,9 +24,9 @@ class StorageDTO {
         ? new JWTPayload.fromJson(json['payload'])
         : null;
     if (json['shoppingLists'] != null) {
-      shoppingLists = new List<StorageShoppingListsDTO>.empty();
+      shoppingLists = [];
       json['shoppingLists'].forEach((v) {
-        shoppingLists!.add(new StorageShoppingListsDTO.fromJson(v));
+        shoppingLists?.add(new StorageShoppingListsDTO.fromJson(v));
       });
     }
   }

@@ -17,29 +17,29 @@ class ApiRepository {
     var response = await fetch(() => dio.get(
           '${Constantes.urlAPI}/$endpoint',
           queryParameters: parameters,
-          options:
-              Options(headers: {'Authorization': 'Bearer ${payload!.token}'}),
+          options: (payload != null && payload.token != null
+              ? Options(headers: {'Authorization': 'Bearer ${payload.token}'})
+              : new Options()),
         ));
 
-    if (response != null && response.statusCode == 401) {
-      var novoToken = await refreshToken(payload!.token);
-      var dataUser = await storageRepository.getDataUser();
-      dataUser.payload = novoToken;
-      await storageRepository.save(key: 'dataUser', value: dataUser);
-    }
+    // if (response != null && response.statusCode == 401) {
+    //   var novoToken = await refreshToken(payload!.token);
+    //   var dataUser = await storageRepository.getDataUser();
+    //   dataUser.payload = novoToken;
+    //   await storageRepository.save(key: 'dataUser', value: dataUser);
+    // }
 
     return response;
   }
 
   Future<Response?> post({String? endpoint, dynamic body}) async {
     var payload = await storageRepository.getJwtPayload();
-
     return await fetch(() => dio.post(
           '${Constantes.urlAPI}/$endpoint',
           data: body,
-          options: (payload != null
+          options: (payload != null && payload.token != null
               ? Options(headers: {'Authorization': 'Bearer ${payload.token}'})
-              : {}) as Options?,
+              : new Options()),
         ));
   }
 
@@ -49,8 +49,9 @@ class ApiRepository {
     return await fetch(() => dio.put(
           '${Constantes.urlAPI}/$endpoint',
           data: body,
-          options:
-              Options(headers: {'Authorization': 'Bearer ${payload!.token}'}),
+          options: (payload != null && payload.token != null
+              ? Options(headers: {'Authorization': 'Bearer ${payload.token}'})
+              : new Options()),
         ));
   }
 
@@ -60,8 +61,9 @@ class ApiRepository {
     return await fetch(() => dio.delete(
           '${Constantes.urlAPI}/$endpoint',
           data: body,
-          options:
-              Options(headers: {'Authorization': 'Bearer ${payload!.token}'}),
+          options: (payload != null && payload.token != null
+              ? Options(headers: {'Authorization': 'Bearer ${payload.token}'})
+              : new Options()),
         ));
   }
 

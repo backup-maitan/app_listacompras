@@ -15,7 +15,7 @@ class SplashView extends StatelessWidget {
     return GetBuilder<AuthController>(
       init: authController,
       initState: (_) async {
-        await storageController.setStorageDefault();
+        // await storageController.setStorageDefault();
         await authController.checkIsLogged();
       },
       builder: (controller) {

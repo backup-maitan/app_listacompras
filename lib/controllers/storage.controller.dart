@@ -1,3 +1,4 @@
+import 'package:app_notes/dto/storage-usuario.dto.dart';
 import 'package:app_notes/dto/storage.dto.dart';
 import 'package:app_notes/repositories/storage.repository.dart';
 import 'package:get/get.dart';

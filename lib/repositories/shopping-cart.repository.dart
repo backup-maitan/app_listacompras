@@ -9,26 +9,27 @@ class ShoppingCartRepository {
   ApiRepository repository = ApiRepository();
 
   Future<bool> adicionar(params) async {
-    var response =
-        await (repository.post(endpoint: 'shopping-lists', body: params) as FutureOr<Response<dynamic>>);
+    var response = await (repository.post(
+        endpoint: 'shopping-lists',
+        body: params) as FutureOr<Response<dynamic>>);
     if (response.statusCode != 201) return false;
     return true;
     // return ApiResponse.fromJson(response.data);
   }
 
   Future<bool> addItemToCart(params) async {
-    var response = await (repository.post(
-        endpoint: 'shopping-lists/add-item', body: params) as FutureOr<Response<dynamic>>);
-    if (response.statusCode != 201) return false;
+    var response = await repository.post(
+        endpoint: 'shopping-lists/add-item', body: params);
+    if (response?.statusCode != 201) return false;
     print(response);
     return true;
     // return ApiResponse.fromJson(response.data);
   }
 
   Future<bool> checkOut(params) async {
-    var response = await (repository.post(
-        endpoint: 'shopping-lists/check-out', body: params) as FutureOr<Response<dynamic>>);
-    if (response.statusCode != 201) return false;
+    var response = await repository.post(
+        endpoint: 'shopping-lists/check-out', body: params);
+    if (response?.statusCode != 201) return false;
     print(response);
     return true;
     // return ApiResponse.fromJson(response.data);

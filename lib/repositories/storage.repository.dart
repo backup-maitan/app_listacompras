@@ -27,7 +27,7 @@ class StorageRepository {
 
   Future<List<ShoppingLists>> getShoppingLists() async {
     var dataUser = await read('dataUser');
-    var shoppingLists = new List<ShoppingLists>.empty();
+    var shoppingLists = new List<ShoppingLists>.empty(growable: true);
     if (dataUser['shoppingLists'] != null) {
       dataUser['shoppingLists'].forEach((v) {
         shoppingLists.add(new ShoppingLists.fromJson(v));
@@ -44,9 +44,9 @@ class StorageRepository {
 
   Future<StorageDTO> getDataUser() async {
     var user = await read('dataUser');
-    print(user);
-    user = StorageDTO.fromJson(user);
-    return user;
+    if (user == null) return StorageDTO.fromJson(StorageDTO().toJson());
+
+    return StorageDTO.fromJson(user);
   }
 
   Future<JWTPayload?> getJwtPayload() async {

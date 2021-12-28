@@ -8,13 +8,14 @@ import 'package:get/get.dart';
 import 'package:app_notes/controllers/auth.controller.dart';
 
 class Body extends StatelessWidget {
+  final AuthController authController =
+      Get.put<AuthController>(AuthController());
+
   final ProductController productController = Get.put(ProductController());
   final ShoppingCartController shoppingCartController =
       Get.put(ShoppingCartController());
-  final AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
-    var name = authController.userStorage.value!.name;
     return GetX(
       init: productController,
       initState: (_) async {
@@ -38,7 +39,7 @@ class Body extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          "Olá, $name",
+                          "Olá, ${authController.userStorage.value.name}",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,

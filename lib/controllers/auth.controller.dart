@@ -15,14 +15,14 @@ class AuthController extends GetxController {
   RxList<Errors> errors = List<Errors>.empty().obs;
   // RxBool isLogged = false.obs;
 
-  Rx<StorageUsuarioDTO?> userStorage = StorageUsuarioDTO().obs;
+  Rx<StorageUsuarioDTO> userStorage = StorageUsuarioDTO().obs;
 
   checkIsLogged() async {
     var isLogged = await (storageRepository.getIsLogged());
     print(isLogged);
     if (isLogged != null && isLogged) {
       var dataUser = await storageRepository.getDataUser();
-      userStorage.value = dataUser.user;
+      userStorage.value = dataUser.user!;
       Get.offNamed('/home');
     } else {
       Get.offNamed('/login');
@@ -38,8 +38,10 @@ class AuthController extends GetxController {
           'Não foi possivel realizar o login', "Verifique o email/senha.");
       return;
     }
+
     var dataUser = await storageRepository.getDataUser();
-    userStorage.value = dataUser.user;
+    userStorage.value = dataUser.user!;
+
     Get.offNamed('/home');
     return apiResponse;
   }

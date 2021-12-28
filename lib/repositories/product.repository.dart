@@ -11,8 +11,8 @@ class ProductRepository {
   StorageRepository storageRepository = StorageRepository();
 
   Future<bool> adicionar({CreateProductDTO? params}) async {
-    var response = await (repository.post(endpoint: 'products', body: params) as FutureOr<Response<dynamic>>);
-    if (response.statusCode != 201) return false;
+    var response = await repository.post(endpoint: 'products', body: params);
+    if (response?.statusCode != 201) return false;
     return true;
     // return ApiResponse.fromJson(response.data);
   }

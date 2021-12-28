@@ -71,9 +71,9 @@ class NoAccountText extends StatelessWidget {
 }
 
 class LoginForm extends StatelessWidget {
-  TextEditingController? email = TextEditingController();
-  TextEditingController? pass = TextEditingController();
-  final AuthController? authController = Get.put(AuthController());
+  TextEditingController email = TextEditingController();
+  TextEditingController pass = TextEditingController();
+  AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -87,16 +87,16 @@ class LoginForm extends StatelessWidget {
             buildPasswordFormField(),
             SizedBox(height: getProportionateScreenHeight(30)),
             Container(
-              height: 200,
+              height: getProportionateScreenHeight(120),
               child: FormError(),
             ),
             SizedBox(height: getProportionateScreenHeight(30)),
             DefaultButton(
               text: "Continuar",
               press: () async {
-                await authController!.authenticate(
-                  email: email!.text,
-                  password: pass!.text,
+                await authController.authenticate(
+                  email: email.text,
+                  password: pass.text,
                 );
               },
             )
